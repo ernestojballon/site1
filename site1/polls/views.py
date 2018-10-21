@@ -2,11 +2,12 @@ from django.http import HttpResponse
 from django.template import loader
 
 from .models import Question
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    q = Question()
+    latest_question_list =q.alll()
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 
