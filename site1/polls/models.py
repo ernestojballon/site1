@@ -13,7 +13,8 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
     def alll(self):
         with connection.cursor() as cursor:
             # cursor.execute("select * from question where pub_date= %s", [self.pub_date])
